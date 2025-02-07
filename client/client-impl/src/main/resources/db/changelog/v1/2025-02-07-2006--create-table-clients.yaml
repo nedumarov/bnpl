@@ -1,0 +1,89 @@
+databaseChangeLog:
+  - changeSet:
+      id: 2025-02-07-2006--create-table-clients
+      author: ned_umarov
+      preConditions:
+        - not:
+            - tableExists:
+                schemaName: client
+                tableName: client_info
+        - onFail: WARN
+      comment: "Создание таблицы клиентов для хранения персональных данных"
+
+      changes:
+
+        - tagDatabase:
+            tag: v1.0
+
+        - createSequence:
+            schemaName: client
+            sequenceName: client_info_id_seq
+            dataType: BIGINT
+            incrementBy: 1
+            minValue: 1
+            startValue: 1
+            cacheSize: 20
+            cycle: false
+
+        - createTable:
+            schemaName: client
+            tableName: client_info
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  defaultValueComputed: "nextval('client.client_info_id_seq')"
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: created_at
+                  type: TIMESTAMP WITH TIME ZONE
+                  constraints:
+                    nullable: false
+              - column:
+                  name: updated_at
+                  type: TIMESTAMP WITH TIME ZONE
+              - column:
+                  name: preferable_language
+                  type: VARCHAR(2)
+                  defaultValue: "UZ"
+                  constraints:
+                    nullable: false
+              - column:
+                  name: first_name
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: last_name
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: patronymic
+                  type: VARCHAR(255)
+              - column:
+                  name: birth_date
+                  type: DATE
+                  constraints:
+                    nullable: false
+              - column:
+                  name: pin
+                  type: VARCHAR(20)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: sex
+                  type: VARCHAR(50)
+                  constraints:
+                    nullable: false
+
+      rollback:
+
+        - dropSequence:
+            schemaName: client
+            sequenceName: client_info_id_seq
+
+        - dropTable:
+            schemaName: client
+            tableName: client_info

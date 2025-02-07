@@ -3,4 +3,3 @@ plugins {
 }
 
 rootProject.name = 'bnpl'
-include "${gatewayModuleName}:${gatewayApiName}", "${gatewayModuleName}:${gatewayImplName}"

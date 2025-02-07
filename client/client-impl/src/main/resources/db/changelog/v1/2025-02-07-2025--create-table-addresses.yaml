@@ -1,0 +1,88 @@
+databaseChangeLog:
+  - changeSet:
+      id: 2025-02-07-2006--create-table-addresses
+      author: ned_umarov
+      preConditions:
+        - not:
+            - tableExists:
+                schemaName: client
+                tableName: addresses
+        - onFail: WARN
+      comment: "Создание таблицы адресов клиентов"
+
+      changes:
+
+        - tagDatabase:
+            tag: v1.0
+
+        - createSequence:
+            schemaName: client
+            sequenceName: addresses_id_seq
+            dataType: BIGINT
+            incrementBy: 1
+            minValue: 1
+            startValue: 1
+            cacheSize: 20
+            cycle: false
+
+        - createTable:
+            schemaName: client
+            tableName: addresses
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  defaultValueComputed: "nextval('client.addresses_id_seq')"
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: created_at
+                  type: TIMESTAMP WITH TIME ZONE
+                  constraints:
+                    nullable: false
+              - column:
+                  name: updated_at
+                  type: TIMESTAMP WITH TIME ZONE
+              - column:
+                  name: region
+                  type: VARCHAR(255)
+              - column:
+                  name: address
+                  type: VARCHAR(255)
+              - column:
+                  name: country
+                  type: VARCHAR(255)
+              - column:
+                  name: cadastre
+                  type: VARCHAR(255)
+              - column:
+                  name: district
+                  type: VARCHAR(255)
+              - column:
+                  name: region_id
+                  type: VARCHAR(255)
+              - column:
+                  name: country_id
+                  type: VARCHAR(255)
+              - column:
+                  name: district_id
+                  type: VARCHAR(255)
+              - column:
+                  name: region_id_cbu
+                  type: VARCHAR(255)
+              - column:
+                  name: country_id_cbu
+                  type: VARCHAR(255)
+              - column:
+                  name: district_id_cbu
+                  type: VARCHAR(255)
+
+      rollback:
+
+        - dropSequence:
+            schemaName: client
+            sequenceName: addresses_id_seq
+
+        - dropTable:
+            schemaName: client
+            tableName: addresses

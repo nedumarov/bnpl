@@ -1,0 +1,4 @@
+rootProject.name = 'client'
+
+include 'client-api'
+include 'client-impl'

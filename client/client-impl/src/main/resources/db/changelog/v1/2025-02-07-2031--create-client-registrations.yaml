@@ -1,0 +1,111 @@
+databaseChangeLog:
+  - changeSet:
+      id: 2025-02-07-2031--create-client-registrations
+      author: ned_umarov
+      preConditions:
+        - not:
+            - tableExists:
+                schemaName: client
+                tableName: client_registrations
+        - onFail: WARN
+      comment: "Создание таблицы регистраций клиентов"
+
+      changes:
+
+        - tagDatabase:
+            tag: v1.0
+
+        - createSequence:
+            schemaName: client
+            sequenceName: client_registrations_id_seq
+            dataType: BIGINT
+            incrementBy: 1
+            minValue: 1
+            startValue: 1
+            cacheSize: 20
+            cycle: false
+
+        - createTable:
+            schemaName: client
+            tableName: client_registrations
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  defaultValueComputed: "nextval('client.client_registrations_id_seq')"
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: created_at
+                  type: TIMESTAMP WITH TIME ZONE
+                  constraints:
+                    nullable: false
+              - column:
+                  name: updated_at
+                  type: TIMESTAMP WITH TIME ZONE
+              - column:
+                  name: client_id
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+              - column:
+                  name: address_id
+                  type: BIGINT
+                  constraints:
+                    nullable: true
+              - column:
+                  name: registration_type
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: registration_date
+                  type: DATE
+                  constraints:
+                    nullable: false
+              - column:
+                  name: registration_end_date
+                  type: DATE
+
+        - addForeignKeyConstraint:
+            constraintName: fk_client_registrations_addresses_address_id
+            baseTableSchemaName: client
+            baseTableName: client_registrations
+            baseColumnNames: address_id
+            referencedTableSchemaName: client
+            referencedTableName: addresses
+            referencedColumnNames: id
+            onUpdate: CASCADE
+            onDelete: RESTRICT
+
+        - addForeignKeyConstraint:
+            constraintName: fk_client_registrations_client_info_client_id
+            baseTableSchemaName: client
+            baseTableName: client_registrations
+            baseColumnNames: client_id
+            referencedTableSchemaName: client
+            referencedTableName: client_info
+            referencedColumnNames: id
+            onUpdate: CASCADE
+            onDelete: RESTRICT
+
+
+      rollback:
+
+        - dropForeignKeyConstraint:
+            baseTableSchemaName: client
+            baseTableName: client_registrations
+            constraintName: fk_client_registrations_addresses_address_id
+
+        - dropForeignKeyConstraint:
+            baseTableSchemaName: client
+            baseTableName: client_registrations
+            constraintName: fk_client_registrations_client_info_client_id
+
+        - dropSequence:
+            schemaName: client
+            sequenceName: client_registrations_id_seq
+
+        - dropTable:
+            schemaName: client
+            tableName: client_registrations
