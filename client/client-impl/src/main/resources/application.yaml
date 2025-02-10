@@ -1,5 +1,28 @@
 spring:
   application:
     name: client-impl
+  data:
+    jpa:
+      repositories:
+        enabled: true
+  jpa:
+    generate-ddl: false
+    hibernate:
+      ddl-auto: validate
+  datasource:
+    driver-class-name: ${DB_DRIVER}
+    url: ${DB_URL}
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
 
-
+  liquibase:
+    enabled: true
+    change-log: classpath:/db/changelog/db.changelog-master.yaml
+    default-schema: changelog
+    database-change-log-table: ${CHANGE_LOG}
+    database-change-log-lock-table: ${CHANGE_LOG_LOCK}
+    driver-class-name: ${DB_DRIVER}
+    url: ${DB_URL}
+    user: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
+    drop-first: false

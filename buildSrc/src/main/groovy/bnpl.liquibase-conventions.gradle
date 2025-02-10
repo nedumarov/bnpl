@@ -1,0 +1,38 @@
+plugins {
+    id 'org.liquibase.gradle'
+}
+
+configurations {
+    liquibaseRuntime.extendsFrom runtimeClasspath
+}
+
+dependencies {
+    implementation "org.liquibase:liquibase-core:${liquibaseVersion}"
+
+    liquibaseRuntime "info.picocli:picocli:${picocliVersion}"
+    liquibaseRuntime 'org.yaml:snakeyaml'
+    liquibaseRuntime sourceSets.main.output
+}
+
+ext.springProps = new Properties()
+springProps.load(new File(projectDir, ".env").newInputStream())
+
+liquibase {
+    activities {
+        main {
+            classpath 'src/main/resources/'
+            changelogFile '/db/changelog/db.changelog-master.yaml'
+
+            driver springProps['DB_DRIVER']
+            url springProps['DB_URL']
+            username springProps['DB_USERNAME']
+            password springProps['DB_PASSWORD']
+
+            defaultSchemaName 'changelog'
+            databaseChangelogTableName springProps['CHANGE_LOG']
+            databaseChangelogLockTableName springProps['CHANGE_LOG_LOCK']
+
+        }
+    }
+    runList = 'main'
+}

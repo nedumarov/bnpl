@@ -1,0 +1,13 @@
+plugins {
+    id 'java'
+    id 'java-library'
+}
+
+tasks.named(jar.name) {
+    enabled = true
+    archiveBaseName.set("${project.name}-${project.version}.jar")
+}
+
+tasks.named(bootJar.name) {
+    enabled = false
+}
