@@ -5,6 +5,7 @@ buildscript {
 
 plugins {
     id 'bnpl.common-conventions'
+    id 'bnpl.api-conventions'
     id 'org.springframework.boot' version "$springVersion"
     id 'io.spring.dependency-management' version "$springDependencyManagementVersion"
 }

@@ -1,17 +1,27 @@
 package uz.bnpl.client.model.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.Builder;
+import uz.bnpl.client.constant.Language;
+import uz.bnpl.client.constant.Sex;
+
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.OffsetDateTime;
+import java.util.List;
 
-public record ClientInfoDto(Long id,
+@Builder
+public record ClientInfoDto(@JsonIgnore Long id,
                             OffsetDateTime createdAt,
-                            OffsetDateTime updatedAt,
-                            String preferableLanguage,
+                            @JsonIgnore OffsetDateTime updatedAt,
+                            Language preferableLanguage,
                             String firstName,
                             String lastName,
                             String patronymic,
                             LocalDate birthDate,
                             String pin,
-                            String sex) implements Serializable {
+                            List<ClientDocumentDto> clientDocuments,
+                            List<AddressDto> addresses,
+                            List<ClientRegistrationDto> registrations,
+                            Sex sex) implements Serializable {
 }

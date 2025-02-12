@@ -2,12 +2,17 @@ package uz.bnpl.client.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
+import lombok.experimental.SuperBuilder;
+import uz.bnpl.client.constant.Language;
+import uz.bnpl.client.constant.Sex;
+import uz.bnpl.client.entity.config.BaseEntity;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.OffsetDateTime;
 
-@Builder
+@SuperBuilder
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
@@ -15,8 +20,9 @@ import java.time.OffsetDateTime;
 @ToString(onlyExplicitlyIncluded = true)
 @Entity(name = ClientInfo.Constants.ENTITY_NAME)
 @Table(name = ClientInfo.Constants.TABLE_NAME, schema = "client")
-public class ClientInfo implements Serializable {
+public class ClientInfo extends BaseEntity implements Serializable {
 
+    @Serial
     private static final long serialVersionUID = -5107501379275690506L;
 
     @Id
@@ -25,14 +31,9 @@ public class ClientInfo implements Serializable {
     @Column(name = Constants.COLUMN_ID_NAME, nullable = false)
     private Long id;
 
-    @Column(name = Constants.COLUMN_CREATEDAT_NAME, nullable = false)
-    private OffsetDateTime createdAt;
-
-    @Column(name = Constants.COLUMN_UPDATEDAT_NAME)
-    private OffsetDateTime updatedAt;
-
+    @Enumerated(EnumType.STRING)
     @Column(name = Constants.COLUMN_PREFERABLELANGUAGE_NAME, nullable = false, length = 2)
-    private String preferableLanguage;
+    private Language preferableLanguage;
 
     @Column(name = Constants.COLUMN_FIRSTNAME_NAME, nullable = false)
     private String firstName;
@@ -49,15 +50,14 @@ public class ClientInfo implements Serializable {
     @Column(name = Constants.COLUMN_PIN_NAME, nullable = false, length = 20)
     private String pin;
 
+    @Enumerated(EnumType.STRING)
     @Column(name = Constants.COLUMN_SEX_NAME, nullable = false, length = 50)
-    private String sex;
+    private Sex sex;
 
     public static class Constants {
         public static final String ENTITY_NAME = "ClientInfo";
         public static final String TABLE_NAME = "client_info";
         public static final String COLUMN_ID_NAME = "id";
-        public static final String COLUMN_CREATEDAT_NAME = "created_at";
-        public static final String COLUMN_UPDATEDAT_NAME = "updated_at";
         public static final String COLUMN_PREFERABLELANGUAGE_NAME = "preferable_language";
         public static final String COLUMN_FIRSTNAME_NAME = "first_name";
         public static final String COLUMN_LASTNAME_NAME = "last_name";

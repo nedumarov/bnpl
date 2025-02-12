@@ -4,7 +4,9 @@ import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
+import uz.bnpl.client.entity.config.BaseEntity;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.time.OffsetDateTime;
 
@@ -16,8 +18,9 @@ import java.time.OffsetDateTime;
 @ToString(onlyExplicitlyIncluded = true)
 @Entity(name = ClientDocument.Constants.ENTITY_NAME)
 @Table(name = ClientDocument.Constants.TABLE_NAME, schema = "client")
-public class ClientDocument implements Serializable {
+public class ClientDocument extends BaseEntity implements Serializable {
 
+    @Serial
     private static final long serialVersionUID = -8431387891938085522L;
 
     @Id
@@ -25,12 +28,6 @@ public class ClientDocument implements Serializable {
     @SequenceGenerator(name = "client_documents_id_gen", sequenceName = "client_documents_id_seq", allocationSize = 1)
     @Column(name = Constants.COLUMN_ID_NAME, nullable = false)
     private Long id;
-
-    @Column(name = Constants.COLUMN_CREATEDAT_NAME, nullable = false)
-    private OffsetDateTime createdAt;
-
-    @Column(name = Constants.COLUMN_UPDATEDAT_NAME)
-    private OffsetDateTime updatedAt;
 
     @Column(name = Constants.COLUMN_DOCTYPE_NAME, length = 45)
     private String docType;
@@ -59,8 +56,6 @@ public class ClientDocument implements Serializable {
         public static final String ENTITY_NAME = "ClientDocument";
         public static final String TABLE_NAME = "client_documents";
         public static final String COLUMN_ID_NAME = "id";
-        public static final String COLUMN_CREATEDAT_NAME = "created_at";
-        public static final String COLUMN_UPDATEDAT_NAME = "updated_at";
         public static final String COLUMN_DOCTYPE_NAME = "doc_type";
         public static final String COLUMN_DOCSERIES_NAME = "doc_series";
         public static final String COLUMN_DOCNUMBER_NAME = "doc_number";

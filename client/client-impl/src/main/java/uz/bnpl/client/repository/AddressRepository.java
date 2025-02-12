@@ -7,4 +7,5 @@ import uz.bnpl.client.entity.Address;
 
 @Repository
 public interface AddressRepository extends JpaRepository<Address, Long>, JpaSpecificationExecutor<Address> {
+    Boolean existsByCadastre(String cadastre);
 }

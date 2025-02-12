@@ -16,5 +16,6 @@ public record AddressDto(Long id,
                          String districtId,
                          String regionIdCbu,
                          String countryIdCbu,
-                         String districtIdCbu) implements Serializable {
+                         String districtIdCbu,
+                         Boolean isCurrent) implements Serializable {
 }

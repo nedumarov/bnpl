@@ -2,7 +2,9 @@ package uz.bnpl.client.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
+import uz.bnpl.client.entity.config.BaseEntity;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.time.OffsetDateTime;
 
@@ -14,8 +16,9 @@ import java.time.OffsetDateTime;
 @ToString(onlyExplicitlyIncluded = true)
 @Entity(name = Address.Constants.ENTITY_NAME)
 @Table(name = Address.Constants.TABLE_NAME, schema = "client")
-public class Address implements Serializable {
+public class Address extends BaseEntity implements Serializable {
 
+    @Serial
     private static final long serialVersionUID = -4929041592093350431L;
 
     @Id
@@ -23,12 +26,6 @@ public class Address implements Serializable {
     @SequenceGenerator(name = "addresses_id_gen", sequenceName = "addresses_id_seq", allocationSize = 1)
     @Column(name = Constants.COLUMN_ID_NAME, nullable = false)
     private Long id;
-
-    @Column(name = Constants.COLUMN_CREATEDAT_NAME, nullable = false)
-    private OffsetDateTime createdAt;
-
-    @Column(name = Constants.COLUMN_UPDATEDAT_NAME)
-    private OffsetDateTime updatedAt;
 
     @Column(name = Constants.COLUMN_REGION_NAME)
     private String region;
@@ -67,8 +64,6 @@ public class Address implements Serializable {
         public static final String ENTITY_NAME = "Address";
         public static final String TABLE_NAME = "addresses";
         public static final String COLUMN_ID_NAME = "id";
-        public static final String COLUMN_CREATEDAT_NAME = "created_at";
-        public static final String COLUMN_UPDATEDAT_NAME = "updated_at";
         public static final String COLUMN_REGION_NAME = "region";
         public static final String COLUMN_ADDRESS_NAME = "address";
         public static final String COLUMN_COUNTRY_NAME = "country";

@@ -1,11 +1,12 @@
 plugins {
     id 'java'
     id 'java-library'
+    id 'org.springframework.boot'
 }
 
 tasks.named(jar.name) {
     enabled = true
-    archiveBaseName.set("${project.name}-${project.version}.jar")
+    archiveBaseName.set("${project.name}")
 }
 
 tasks.named(bootJar.name) {

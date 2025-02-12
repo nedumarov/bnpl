@@ -10,5 +10,5 @@ tasks.named(jar.name) {
 
 tasks.named(bootJar.name) {
     enabled = true
-    archiveBaseName.set("${project.name}-${project.version}.jar")
+    archiveBaseName.set("${project.name}")
 }

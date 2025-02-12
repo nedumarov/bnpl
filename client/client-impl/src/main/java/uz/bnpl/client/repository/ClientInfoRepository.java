@@ -7,4 +7,5 @@ import uz.bnpl.client.entity.ClientInfo;
 
 @Repository
 public interface ClientInfoRepository extends JpaRepository<ClientInfo, Long>, JpaSpecificationExecutor<ClientInfo> {
+    Boolean existsByPin(String pin);
 }
