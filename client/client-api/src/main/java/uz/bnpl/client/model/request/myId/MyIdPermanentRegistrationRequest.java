@@ -1,9 +1,11 @@
 package uz.bnpl.client.model.request.myId;
 
+import java.time.LocalDate;
+
 public record MyIdPermanentRegistrationRequest(
 	String country,
 	String address,
-	String registrationDate,
+	LocalDate registrationDate,
 	String district,
 	String regionIdCbu,
 	String regionId,

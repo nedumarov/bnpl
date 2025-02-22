@@ -8,6 +8,7 @@ import uz.bnpl.client.entity.config.BaseEntity;
 
 import java.io.Serial;
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.time.OffsetDateTime;
 
 @Builder
@@ -42,10 +43,10 @@ public class ClientDocument extends BaseEntity implements Serializable {
     private String docIssuer;
 
     @Column(name = Constants.COLUMN_DOCISSUEDATE_NAME)
-    private OffsetDateTime docIssueDate;
+    private LocalDate docIssueDate;
 
     @Column(name = Constants.COLUMN_DOCEXPIREDATE_NAME)
-    private OffsetDateTime docExpireDate;
+    private LocalDate docExpireDate;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @OnDelete(action = OnDeleteAction.RESTRICT)

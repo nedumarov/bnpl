@@ -1,8 +1,13 @@
 package uz.bnpl.client.model.dto;
 
+import lombok.Builder;
+import lombok.Getter;
+
 import java.io.Serializable;
 import java.time.OffsetDateTime;
 
+@Builder
+@Getter
 public record AddressDto(Long id,
                          OffsetDateTime createdAt,
                          OffsetDateTime updatedAt,

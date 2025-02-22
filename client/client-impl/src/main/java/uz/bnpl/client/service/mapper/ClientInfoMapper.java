@@ -22,6 +22,19 @@ public class ClientInfoMapper {
                 .build();
     }
 
+    public ClientInfo toEntityFromDto(ClientInfoDto clientInfoDto) {
+
+        return ClientInfo.builder()
+                .preferableLanguage(clientInfoDto.preferableLanguage())
+                .birthDate(clientInfoDto.birthDate())
+                .firstName(clientInfoDto.firstName())
+                .lastName(clientInfoDto.lastName())
+                .patronymic(clientInfoDto.patronymic())
+                .pin(clientInfoDto.pin())
+                .sex(clientInfoDto.sex())
+                .build();
+    }
+
     public ClientInfoDto toDto(ClientInfo clientInfo) {
         return ClientInfoDto.builder()
                 .id(clientInfo.getId())

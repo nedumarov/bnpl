@@ -7,6 +7,8 @@ import uz.bnpl.client.entity.Address;
 import uz.bnpl.client.exception.ApplicationException;
 import uz.bnpl.client.exception.cause.ApplicationExceptionCause;
 import uz.bnpl.client.model.dto.AddressDto;
+import uz.bnpl.client.model.dto.PermanentAddressDto;
+import uz.bnpl.client.model.dto.TemporaryAddressDto;
 import uz.bnpl.client.model.request.myId.MyIdAddressRequest;
 import uz.bnpl.client.repository.AddressRepository;
 import uz.bnpl.client.service.mapper.AddressMapper;
@@ -25,18 +27,23 @@ public class AddressServiceImpl implements AddressService {
     @Override
     public List<AddressDto> createAddress(MyIdAddressRequest myIdAddressRequest) {
 
-        Address permanentAddress;
-        Address temporaryAddress;
+        PermanentAddressDto permanentAddressDto = null;
+        TemporaryAddressDto temporaryAddressDto = null;
 
         if (Objects.nonNull(myIdAddressRequest.permanentAddress())) {
-            permanentAddress = saveAddress(addressMapper.toEntity(myIdAddressRequest.permanentRegistration()));
+            Address permanentAddress = saveAddress(addressMapper.toEntity(myIdAddressRequest.permanentRegistration()));
+            permanentAddressDto = addressMapper.toPermanentDto(permanentAddress);
         }
 
         if (Objects.nonNull(myIdAddressRequest.temporaryAddress())) {
-            temporaryAddress = saveAddress(addressMapper.toEntity(myIdAddressRequest.temporaryRegistration()));
+            Address temporaryAddress = saveAddress(addressMapper.toEntity(myIdAddressRequest.temporaryRegistration()));
+            temporaryAddressDto = addressMapper.toTemporaryDto(temporaryAddress);
+
         }
 
-        return List.of(permanentAddressDto, temporaryAddressDto)
+
+
+        return List.of(addressMapper.fromPermanentToDto(permanentAddressDto), addressMapper.fromTemporaryToDto(temporaryAddressDto))
                 .stream()
                 .filter(Objects::nonNull)
                 .toList();
