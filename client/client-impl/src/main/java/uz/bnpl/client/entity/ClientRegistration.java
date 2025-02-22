@@ -2,15 +2,12 @@ package uz.bnpl.client.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
 import uz.bnpl.client.constant.RegistrationType;
 import uz.bnpl.client.entity.config.BaseEntity;
 
 import java.io.Serial;
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.time.OffsetDateTime;
 
 @Builder
 @AllArgsConstructor
@@ -32,12 +29,10 @@ public class ClientRegistration extends BaseEntity implements Serializable {
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @OnDelete(action = OnDeleteAction.RESTRICT)
     @JoinColumn(name = "client_id", nullable = false)
     private ClientInfo client;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @OnDelete(action = OnDeleteAction.RESTRICT)
     @JoinColumn(name = "address_id")
     private Address address;
 

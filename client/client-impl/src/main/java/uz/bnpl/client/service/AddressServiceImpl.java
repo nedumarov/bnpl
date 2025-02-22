@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 import uz.bnpl.client.entity.Address;
 import uz.bnpl.client.exception.ApplicationException;
 import uz.bnpl.client.exception.cause.ApplicationExceptionCause;
-import uz.bnpl.client.model.dto.AddressDto;
+import uz.bnpl.client.model.address.AddressDto;
 import uz.bnpl.client.model.dto.PermanentAddressDto;
 import uz.bnpl.client.model.dto.TemporaryAddressDto;
 import uz.bnpl.client.model.request.myId.MyIdAddressRequest;

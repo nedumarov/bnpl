@@ -57,10 +57,10 @@ databaseChangeLog:
                   type: VARCHAR(255)
               - column:
                   name: doc_issue_date
-                  type: TIMESTAMP WITH TIME ZONE
+                  type: DATE
               - column:
                   name: doc_expire_date
-                  type: TIMESTAMP WITH TIME ZONE
+                  type: DATE
               - column:
                   name: client_id
                   type: BIGINT

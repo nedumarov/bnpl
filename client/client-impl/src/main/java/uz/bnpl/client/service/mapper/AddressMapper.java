@@ -2,7 +2,7 @@ package uz.bnpl.client.service.mapper;
 
 import org.springframework.stereotype.Component;
 import uz.bnpl.client.entity.Address;
-import uz.bnpl.client.model.dto.AddressDto;
+import uz.bnpl.client.model.address.AddressDto;
 import uz.bnpl.client.model.dto.PermanentAddressDto;
 import uz.bnpl.client.model.dto.TemporaryAddressDto;
 import uz.bnpl.client.model.request.myId.MyIdPermanentRegistrationRequest;

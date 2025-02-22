@@ -1,13 +1,11 @@
-package uz.bnpl.client.model.dto;
+package uz.bnpl.client.model.address;
 
 import lombok.Builder;
-import lombok.Getter;
 
 import java.io.Serializable;
 import java.time.OffsetDateTime;
 
 @Builder
-@Getter
 public record AddressDto(Long id,
                          OffsetDateTime createdAt,
                          OffsetDateTime updatedAt,
@@ -21,6 +19,5 @@ public record AddressDto(Long id,
                          String districtId,
                          String regionIdCbu,
                          String countryIdCbu,
-                         String districtIdCbu,
-                         Boolean isCurrent) implements Serializable {
+                         String districtIdCbu) implements Serializable {
 }

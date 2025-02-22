@@ -5,7 +5,7 @@ import org.springframework.stereotype.Component;
 import uz.bnpl.client.entity.Address;
 import uz.bnpl.client.entity.ClientInfo;
 import uz.bnpl.client.entity.ClientRegistration;
-import uz.bnpl.client.model.dto.ClientRegistrationDto;
+import uz.bnpl.client.model.clientregistration.ClientRegistrationDto;
 
 @Component
 @RequiredArgsConstructor
@@ -27,4 +27,13 @@ public class ClientRegMapper {
                 .build();
     }
 
+    public ClientRegistrationDto toDto(ClientRegistration registration) {
+        return ClientRegistrationDto.builder()
+                .registrationType(registration.getRegistrationType())
+                .registrationDate(registration.getRegistrationDate())
+                .registrationEndDate(registration.getRegistrationEndDate())
+                .address(addressMapper.toDto(registration.getAddress()))
+                .client(clientInfoMapper.toDto(registration.getClient()))
+                .build();
+    }
 }

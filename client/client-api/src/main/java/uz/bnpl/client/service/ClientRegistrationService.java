@@ -1,8 +1,8 @@
 package uz.bnpl.client.service;
 
-import uz.bnpl.client.model.dto.ClientRegistrationDto;
-import uz.bnpl.client.model.request.myId.MyIdProfileRequest;
+import uz.bnpl.client.model.clientregistration.ClientRegistrationCreateRequest;
+import uz.bnpl.client.model.clientregistration.ClientRegistrationsCreateRequest;
 
 public interface ClientRegistrationService {
-    public ClientRegistrationDto registerClient(ClientRegistrationDto clientRegistrationDto);
+    ClientRegistrationCreateRequest<?> registerClient(ClientRegistrationsCreateRequest clientRegistrationDto);
 }

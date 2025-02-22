@@ -36,6 +36,6 @@ public class ClientInfoImpl implements ClientInfoService {
         // Save registration
         // Documents
 
-        return clientInfoMapper.toDto();
+        return null;
     }
 }
