@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import uz.bnpl.client.entity.Address;
 import uz.bnpl.client.exception.ApplicationException;
 import uz.bnpl.client.exception.cause.ApplicationExceptionCause;
+import uz.bnpl.client.model.address.AddressCreateRequest;
 import uz.bnpl.client.model.address.AddressDto;
 import uz.bnpl.client.model.dto.PermanentAddressDto;
 import uz.bnpl.client.model.dto.TemporaryAddressDto;
@@ -25,7 +26,7 @@ public class AddressServiceImpl implements AddressService {
     private final AddressRepository addressRepository;
 
     @Override
-    public List<AddressDto> createAddress(MyIdAddressRequest myIdAddressRequest) {
+    public List<AddressDto> createAddress(AddressCreateRequest myIdAddressRequest) {
 
         PermanentAddressDto permanentAddressDto = null;
         TemporaryAddressDto temporaryAddressDto = null;
